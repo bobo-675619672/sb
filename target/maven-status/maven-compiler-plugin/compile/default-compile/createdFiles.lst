@@ -1,0 +1,5 @@
+com\ts\wb\model\dao\StudentDao.class
+com\ts\wb\Application.class
+com\ts\wb\model\entity\Student.class
+com\ts\wb\model\entity\School.class
+com\ts\wb\service\StudentService.class
