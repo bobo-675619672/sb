@@ -8,7 +8,10 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.ts.wb.enums.ResultEnum;
+import com.ts.wb.exception.CoolException;
 import com.ts.wb.model.dao.UserDao;
 import com.ts.wb.model.entity.User;
 
@@ -21,11 +24,29 @@ public class UserService {
 	@PersistenceContext //注入的是实体管理器,执行持久化操作
     EntityManager entityManager;
 	
-	public User login(String account, String password) {
+	public User login(String account, String password, String type) {
+		if (StringUtils.isEmpty(type)) {
+			type = "1";
+		}
+		switch (type) {
+			case "1":
+				return login1(account, password);
+			case "2":
+				return login2(account, password);
+			case "3":
+				return login3(account, password);
+			default:
+				throw new CoolException(ResultEnum.BUSS_ERROR, "登录方式");
+			}
+	}
+
+	// Query
+	public User login1(String account, String password) {
 		return userDao.findByCondition(account, password);
 	}
 	
-	public User queryUser(String account, String password) {
+	// 自定义语句查询
+	public User login2(String account, String password) {
 		String sql = " SELECT u.* FROM t_User u WHERE u.account = '" + account + "' AND u.password = '" + password + "' ";
 		Query query =  entityManager.createNativeQuery(sql);
 		
@@ -41,7 +62,12 @@ public class UserService {
         user.setPassword(String.valueOf(obj[3]));
         return user;
 	}
-
+	
+	// jpa形式
+	public User login3(String account, String password) {
+		return userDao.findByAccountAndPassword(account, password);
+	}
+	
 	public List<User> list() {
 //		userDao.save(user); // 增、改
 //		userDao.deleteById(); // 删

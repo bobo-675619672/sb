@@ -10,7 +10,9 @@ import com.ts.wb.model.entity.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
 
-	@Query(" SELECT u FROM User u WHERE u.account = ':account' AND u.password = ':password' ")
+	@Query(" SELECT u FROM User u WHERE u.account = :account AND u.password = :password ")
 	User findByCondition(@Param("account") String account, @Param("password") String password);
+	
+	User findByAccountAndPassword(String account, String password);
 	
 }

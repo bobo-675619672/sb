@@ -2,8 +2,7 @@ package com.ts.wb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 //@EnableSwagger2

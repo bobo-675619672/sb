@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -20,7 +21,7 @@ public class RestAspect {
 
 	private final static Logger logger = LoggerFactory.getLogger(RestAspect.class);
 	
-	@Pointcut("execution(public * com.ts.wb..*(..))")
+	@Pointcut("execution(public * com.ts.wb.rest..*(..))")
     public void log() {
 
     }
@@ -48,7 +49,7 @@ public class RestAspect {
         logger.info("class_method={}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 
         //参数拦截
-        logger.info("args={}", joinPoint.getArgs());
+        logger.info("args={}", StringUtils.arrayToDelimitedString(joinPoint.getArgs(), ","));
 	}
 	
 	@After("log()")

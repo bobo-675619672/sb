@@ -12,7 +12,7 @@ public class ExceptionHandle {
 
 	 @ExceptionHandler(value = Exception.class)
 	 @ResponseBody
-	 public ResponseMsg<String> handle(Exception e){
+	 public ResponseMsg<String> handle(Exception e) {
 		 //判断异常是否是我们自定义的异常
 		 if(e instanceof CoolException){
 			 CoolException exception = (CoolException) e;
