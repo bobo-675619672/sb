@@ -1,0 +1,14 @@
+ /app/usercenter/test/sentenceTest/submit
+ {"id":953}
+
+ /app/usercenter/test/sentenceTest/queryAnswer
+ recordId=953
+¶Ô¶Ô¶Ô
+select id,created_at,updated_at,token,vaild_at,user_id,platform from uc_data_token where 1=1 and user_id= ? and platform= ? 
+ 3232(Long), APP(String)
+
+ SELECT a.id, a.sort, a.type,a.text_id,a.content, a.record, a.translate, a.test_standard, a.uni_sound, upt.replay_score, upt.audio_url FROM cms_text_textsentence a LEFT JOIN ( SELECT upt.text_id,uptd.sentence_id,uptd.replay_score,uptd.audio_url FROM uc_prm_text upt LEFT JOIN uc_prm_textdetail uptd ON upt.id = uptd.record_id WHERE upt.mode = 'PRACTICE' AND upt.unit_id = ? AND upt.text_id = ? AND upt.student_id = ? ) upt ON upt.text_id = a.text_id AND a.id =upt.`sentence_id` WHERE a.text_id = ? ORDER BY a.sort 
+ Parameters: 72(Long), 27(Long), 138(Long), 27(Long)
+
+select id,created_at,updated_at,mode,unit_id,text_id,student_id,score,star_count,status from uc_prm_text where 1=1  and mode= #{mode}  and unit_id= #{unitId}  and text_id= #{textId}  and student_id= #{studentId}
+ PRACTICE(String), 72(Long), 27(Long), 138(Long)
