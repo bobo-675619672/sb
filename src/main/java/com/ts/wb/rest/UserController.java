@@ -2,7 +2,10 @@ package com.ts.wb.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ts.wb.model.ResponseMsg;
+import com.ts.wb.model.dto.UserRegisterVo;
 import com.ts.wb.model.dto.UserVo;
 import com.ts.wb.model.entity.User;
 import com.ts.wb.service.UserService;
@@ -34,6 +38,15 @@ public class UserController extends BaseController {
 	@GetMapping("/list")
 	public List<User> list() {
 		return userService.list();
+	}
+	
+	@PostMapping("/register")
+	public ResponseMsg<String> register(@Valid @RequestBody UserRegisterVo userVo, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return fail(bindingResult.getFieldError().getDefaultMessage());
+		}
+		// TODO 注册
+		return null;
 	}
 	
 	// 经典 风格
